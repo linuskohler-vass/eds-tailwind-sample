@@ -1,6 +1,7 @@
 .*
 *.md
 styles/base.css
+tailwind.config.js
 karma.config.js
 LICENSE
 package.json
