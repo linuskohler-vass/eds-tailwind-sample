@@ -1,0 +1,5 @@
+/* Customized Tailwind variables */
+@theme {
+    --color-ets-yellow: #eec365;
+    --breakpoint-2xl: 90rem;
+}

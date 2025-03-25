@@ -1,6 +1,9 @@
 .*
 *.md
+styles/tailwind.css
+styles/theme.css
 styles/base.css
+styles/layout.css
 tailwind.config.js
 karma.config.js
 LICENSE

@@ -1,1 +1,26 @@
-@import "tailwindcss";
+/* Base styles */
+@layer base {
+    main {
+        @apply container mx-auto;
+    }
+
+    h1 {
+        @apply text-[40px];
+    }
+
+    h2 {
+        @apply text-[32px];
+    }
+
+    h3 {
+        @apply text-[24px];
+    }
+
+    .section {
+        @apply m-3;
+    }
+
+    .leftbox {
+        @apply p-3 bg-stone-100;
+    }
+}

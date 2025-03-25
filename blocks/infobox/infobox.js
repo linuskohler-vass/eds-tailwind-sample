@@ -16,6 +16,6 @@ export default function decorate(block) {
   const bgColorClass = getBackgroundColor(infoText);
 
   block.innerHTML = `
-    <div class="${bgColorClass} rounded-xl m-2 p-5 border border-stone-200 text-grey-800">${contentText}</div>
+    <div class="${bgColorClass} rounded-xl my-2 p-5 border border-stone-200 text-grey-800">${contentText}</div>
   `;
 }
