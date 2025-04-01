@@ -2,4 +2,30 @@
 @theme {
     --color-ets-yellow: #eec365;
     --breakpoint-2xl: 90rem;
+    --animate-nav-in: nav-in 0.4s ease-out forwards;
+    --animate-nav-out: nav-out 0.4s ease-in-out forwards;
+
+    @keyframes nav-in {
+        0% {
+            transform: translateX(100%);
+            visibility: visible;
+        }
+
+        100% {
+            transform: translateX(0);
+            visibility: visible;
+        }
+    }
+
+    @keyframes nav-out {
+        0% {
+            transform: translateX(0);
+            visibility: visible;
+        }
+
+        100% {
+            transform: translateX(100%);
+            visibility: hidden;
+        }
+    }
 }

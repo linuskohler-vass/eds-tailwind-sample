@@ -3,19 +3,24 @@ import { loadFragment } from '../fragment/fragment.js';
 
 function setupHeaderListeners(block) {
   const menuToggle = block.querySelector('#menu-toggle');
+  const menuIcon = block.querySelector('#menu-toggle img');
   const menuContent = block.querySelector('#menu-content');
-
-  // Ensure menu is hidden initially
-  menuContent.style.display = 'none';
+  const menuItemsList = block.querySelector('#menu-content > ul');
 
   menuToggle.addEventListener('click', () => {
     const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
 
-    menuContent.style.display = isExpanded ? 'none' : 'block';
-
-    // Update ARIA attributes
     menuToggle.setAttribute('aria-expanded', String(!isExpanded));
     menuContent.setAttribute('aria-hidden', String(isExpanded));
+
+    menuIcon.classList.toggle('rotate-90', !isExpanded);
+    menuContent.classList.toggle('pointer-events-none', isExpanded);
+
+    menuItemsList.classList.toggle('md:animate-nav-out', isExpanded);
+    menuItemsList.classList.toggle('md:animate-nav-in', !isExpanded);
+
+    menuContent.classList.toggle('hidden', isExpanded);
+    menuContent.classList.toggle('md:block', isExpanded);
   });
 }
 
@@ -41,14 +46,18 @@ export default async function decorate(block) {
     href: a.getAttribute('href') || '#',
   }));
 
+  block.classList.add('shadow-md');
   block.innerHTML = `
-    <header class="flex items-center justify-between p-4 bg-white shadow-md">
+    <header class="flex gap-5 flex-col md:flex-row items-center justify-between p-4 bg-white container mx-auto">
       <a href="${firstLinkHref}" class="text-lg font-bold" aria-label="${firstLinkText}">${firstLinkText}</a>
       
-      <div class="flex flex-col md:flex-row md:items-center gap-4 md:space-x-4 ml-auto"> 
-        <button id="menu-toggle" class="px-3 py-2 border rounded-lg text-gray-700 border-gray-300 hover:bg-gray-200 cursor-pointer transition-all duration-200 md:order-last" aria-expanded="false" aria-controls="menu-content">Menu</button>
-        <nav id="menu-content" class="top-full w-full md:w-auto bg-white p-2" aria-hidden="true">
-          <ul class="flex flex-col md:flex-row md:space-x-4">
+      <div class="flex flex-col md:flex-row md:items-center gap-4 md:space-x-4 md:ml-auto w-full md:w-auto overflow-hidden"> 
+        <button id="menu-toggle" class="px-3 py-2 mr-0 border rounded-lg text-gray-700 border-gray-300 hover:bg-gray-200 cursor-pointer transition-all duration-200 md:order-last inline-flex items-center z-10" aria-expanded="false" aria-controls="menu-content">
+            <img src="../../icons/menu.svg" alt="Menu Icon" class="w-4 h-4 mr-2 transition-transform duration-300" />
+            <span>Menü</span>
+        </button>
+        <nav id="menu-content" class="top-full w-full md:w-auto bg-white p-2 hidden pointer-events-none overflow-hidden" aria-hidden="true">
+          <ul class="flex flex-col md:flex-row md:space-x-4 transition-transform duration-300">
             ${menuLinks.map((link) => `
             <li>
                 <a href="${link.href}" class="block px-4 py-2 md:p-0 hover:text-blue-500 cursor-pointer relative group" aria-label="${link.text}">
@@ -59,10 +68,6 @@ export default async function decorate(block) {
           </ul>
         </nav>
       </div>
-      
-      <button class="text-gray-700" aria-label="Search">
-        <span class="icon icon-search"></span>
-      </button>
     </header>
   `;
 
