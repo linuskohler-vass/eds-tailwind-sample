@@ -14,13 +14,13 @@ function setupHeaderListeners(block) {
     menuContent.setAttribute('aria-hidden', String(isExpanded));
 
     menuIcon.classList.toggle('rotate-90', !isExpanded);
+
     menuContent.classList.toggle('pointer-events-none', isExpanded);
+    menuContent.classList.toggle('hidden', isExpanded);
+    menuContent.classList.toggle('md:block', isExpanded);
 
     menuItemsList.classList.toggle('md:animate-nav-out', isExpanded);
     menuItemsList.classList.toggle('md:animate-nav-in', !isExpanded);
-
-    menuContent.classList.toggle('hidden', isExpanded);
-    menuContent.classList.toggle('md:block', isExpanded);
   });
 }
 
@@ -34,7 +34,6 @@ export default async function decorate(block) {
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
 
-  // decorate nav DOM
   block.textContent = '';
   const firstLink = fragment.querySelector('div:first-child a');
   const firstLinkText = firstLink?.textContent.trim() || '';
