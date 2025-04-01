@@ -34,6 +34,7 @@ export default async function decorate(block) {
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
 
+  // setup header DOM
   block.textContent = '';
   const firstLink = fragment.querySelector('div:first-child a');
   const firstLinkText = firstLink?.textContent.trim() || '';
