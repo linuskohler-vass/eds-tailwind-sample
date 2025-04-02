@@ -25,7 +25,6 @@
     }
 
     /* header and footer are loaded via fragment, to avoid CLS we set a fixed height with a placeholder here */
-
     main .section {
         @apply min-h-[1400px];
     }
