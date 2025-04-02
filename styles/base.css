@@ -25,10 +25,12 @@
     }
 
     /* header and footer are loaded via fragment, to avoid CLS we set a fixed height with a placeholder here */
+    header:empty,
     .header.block[data-block-status="loading"] {
         @apply bg-gray-200 h-[122px] md:h-[74px] animate-pulse;
     }
 
+    footer:empty,
     footer.block[data-block-status="loading"] {
         @apply bg-gray-200 h-[660px] md:h-[280px] animate-pulse;
     }
