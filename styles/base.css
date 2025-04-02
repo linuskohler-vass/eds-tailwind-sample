@@ -1,5 +1,9 @@
 /* Base styles */
 @layer base {
+    body {
+        @apply overflow-hidden;
+    }
+
     main {
         @apply container mx-auto;
     }
