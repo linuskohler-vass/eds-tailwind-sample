@@ -1,16 +1,20 @@
 /* Layout styles on page level (not block level), e.g. set by EDS template */
-.twocolumns {
-    main {
-        display: grid;
-        grid-template-columns: 1fr 3fr;
-        grid-template-areas: "left main";
+@layer base {
+    .sidebar {
+        main {
+            @apply grid grid-cols-2 gap-4;
+        }
     }
 
-    .section {
-        grid-area: main;
+    .twocolumns {
+        main {
+            @apply grid grid-cols-2 gap-4;
+        }
     }
 
-    .section.leftbox {
-        grid-area: left;
+    .onecollumn {
+        main {
+            @apply grid grid-cols-1 gap-4;
+        }
     }
 }
