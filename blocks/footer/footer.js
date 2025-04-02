@@ -23,11 +23,15 @@ export default async function decorate(block) {
     return { title, links };
   });
 
+  // group sections to style them differently
+  const sectionsWithLinks = sections.filter((section) => section.links.length > 0);
+  const sectionsWithoutLinks = sections.filter((section) => section.links.length === 0);
+
   // setup footer DOM
   block.innerHTML = `
     <footer class="bg-gray-100 p-6 text-gray-800">
       <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
-        ${sections.filter((section) => section.links.length > 0).map((section) => `
+        ${sectionsWithLinks.map((section) => `
           <section>
             <h2 class="text-lg font-semibold mb-2">${section.title}</h2>
             <ul>
@@ -39,7 +43,7 @@ export default async function decorate(block) {
         `).join('')}
       </div>
       <div class="container mx-auto grid grid-cols-1 gap-6">
-        ${sections.filter((section) => section.links.length === 0).map((section) => `
+        ${sectionsWithoutLinks.map((section) => `
           <section class="text-center mt-6 text-sm">
             <p>${section.title}</p>
           </section>

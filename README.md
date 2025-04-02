@@ -7,9 +7,8 @@ A document based EDS project using Tailwind 4.
 
 ## Installation
 
-```sh
-npm i
-```
+1. Run `npm install`
+2. Install the [AEM CLI](https://github.com/adobe/helix-cli): `npm install -g @adobe/aem-cli`
 
 ## Linting
 
@@ -18,6 +17,4 @@ npm run lint
 ```
 
 ## Local development
-
-1. Install the [AEM CLI](https://github.com/adobe/helix-cli): `npm install -g @adobe/aem-cli`
-2. Start AEM Proxy: `npm run start` (opens your browser at `http://localhost:3000`)
+Start AEM Proxy: `npm start` (opens your browser at `http://localhost:3000`)

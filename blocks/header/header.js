@@ -34,17 +34,23 @@ export default async function decorate(block) {
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
 
-  // setup header DOM
+  // prepare the first link
   block.textContent = '';
   const firstLink = fragment.querySelector('div:first-child a');
   const firstLinkText = firstLink?.textContent.trim() || '';
   const firstLinkHref = firstLink?.getAttribute('href') || '#';
 
-  // Extract all links and texts from the second div
-  const menuLinks = [...fragment.querySelectorAll('div:nth-child(2) ul li a')].map((a) => ({
-    text: a.textContent.trim(),
-    href: a.getAttribute('href') || '#',
-  }));
+  const currentPath = window.location.pathname;
+
+  // prepare all other links and texts, they come from the second div
+  const menuLinks = [...fragment.querySelectorAll('div:nth-child(2) ul li a')].map((a) => {
+    const linkPath = new URL(a.getAttribute('href'), window.location.origin).pathname;
+    return {
+      text: a.textContent.trim(),
+      href: a.getAttribute('href') || '#',
+      active: currentPath.endsWith(linkPath),
+    };
+  });
 
   block.classList.add('shadow-md');
   block.innerHTML = `
@@ -60,7 +66,7 @@ export default async function decorate(block) {
           <ul class="flex flex-col md:flex-row md:space-x-4 transition-transform duration-300">
             ${menuLinks.map((link) => `
             <li>
-                <a href="${link.href}" class="block px-4 py-2 md:p-0 hover:text-blue-500 cursor-pointer relative group" aria-label="${link.text}">
+                <a href="${link.href}" class="block px-4 py-2 md:p-0 hover:text-blue-500 cursor-pointer relative group ${link.active ? 'font-bold' : ''}" aria-label="${link.text}">
                     ${link.text}
                     <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-blue-500 group-hover:w-full transition-all duration-300"></span>
                 </a>
