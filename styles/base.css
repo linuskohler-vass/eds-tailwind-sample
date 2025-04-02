@@ -23,4 +23,13 @@
     .leftbox {
         @apply p-3 bg-stone-100;
     }
+
+    /* header and footer are loaded via fragment, to avoid CLS we set a fixed height with a placeholder here */
+    .header.block[data-block-status="loading"] {
+        @apply bg-gray-200 h-[122px] md:h-[74px] animate-pulse;
+    }
+
+    footer.block[data-block-status="loading"] {
+        @apply bg-gray-200 h-[660px] md:h-[280px] animate-pulse;
+    }
 }
