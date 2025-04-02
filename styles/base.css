@@ -34,8 +34,4 @@
     footer.block[data-block-status="loading"] {
         @apply bg-gray-200 min-h-[660px] md:min-h-[280px] animate-pulse;
     }
-
-    main .section {
-        @apply min-h-[1400px];
-    }
 }
